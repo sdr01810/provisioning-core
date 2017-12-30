@@ -4,12 +4,12 @@
 
 set -e
 
-xx() {
+function xx() {
 	echo "+" "$@"
 	"$@"
 }
 
-printenv_sorted() {
+function printenv_sorted() {
 	xx printenv | xx env LC_ALL=C sort
 }
 
@@ -31,10 +31,14 @@ xx ls -al /opt/provisioning-core
 
 ##
 
-echo
-echo "Launching a shell..."
-xx :
-xx sh -l
+case /"$-"/ in
+*i*) # interactive
+	echo
+	echo "Launching a shell..."
+	xx :
+	xx sh -l
+	;;
+esac
 
 ##
 

@@ -15,6 +15,11 @@
 ##     sudo ./provision.sh vagrant
 ##
 
+if [ "$(id -u)" -ne 0 ] ; then
+	echo 1>&2 "effective user is not root; aborting."
+	exit 2
+fi
+
 case "$(grep '^ID=' /etc/os-release)" in
 ID=debian|ID=ubuntu)
 	case "$(readlink /bin/sh)" in

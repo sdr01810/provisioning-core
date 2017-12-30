@@ -38,6 +38,10 @@ function install_packages() { # package_name ...
 		xx apt-get install -y apt-utils debconf
 		xx apt-get install -y "$@"
 		;;
+	*|'')
+		echo 1>&2 "unrecognized OS release ID; aborting"
+		exit 2
+		;;
 	esac
 }
 

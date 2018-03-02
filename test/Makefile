@@ -24,7 +24,7 @@ build :: Dockerfile
 	cd .. && docker build -f test/Dockerfile ${docker_build_args_extra} --tag "${image_tag}" .
 
 test :: build
-	docker run "${image_tag}"
+	docker run "${image_tag}" ls -al
 
 push ::
 	docker push "${image_tag}"

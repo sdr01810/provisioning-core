@@ -4,6 +4,8 @@
 
 set -e
 
+umask 0002
+
 function xx() {
 	echo "+" "$@"
 	"$@"
@@ -20,25 +22,23 @@ echo "Environment variables:"
 xx :
 printenv_sorted
 
-xx :
-xx pwd
-
-xx :
-xx ls -al
-
-xx :
-xx ls -al "${provisioning_core_docker_image_home}"
-
 ##
 
-case /"$-"/ in
-*i*) # interactive
+xx :
+xx cd "${provisioning_core_docker_image_home}"
+
+if [ $# -gt 0 ] ; then
 	echo
-	echo "Launching a shell..."
+	echo "Running command..."
 	xx :
-	xx sh -l
-	;;
-esac
+	xx exec "$@"
+else
+if [ -t 0 ] ; then
+	echo
+	echo "Launching shell..."
+	xx :
+	xx exec sh -l
+fi;fi
 
 ##
 

@@ -27,7 +27,7 @@ xx :
 xx ls -al
 
 xx :
-xx ls -al /opt/provisioning-core
+xx ls -al "${provisioning_core_docker_image_home}"
 
 ##
 
